@@ -7,7 +7,7 @@ export default function Header({name}) {
     <View>
       <Text>Welcome to {name}</Text>
     </View>
-  )
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

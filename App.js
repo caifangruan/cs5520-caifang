@@ -2,30 +2,22 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState} from "react";
 import Header from './components/Header';
+import Input from './components/Input';
 
 
 
 export default function App() {
   const appName = "My awesome app";
-  const [text, setText] = useState("");
+  //const [text, setText] = useState("");
 
-  // callback handler
-  function changeTextHandler(changedText){
-    console.log("user is typing", changedText);
-    setText(changedText);
-  }
+  
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Header name={appName} version={2} /> 
-      <TextInput
-        placeholder='Type something'
-        style={styles.input}
-        value={text}
-        onChangeText={changeTextHandler}
-      />
-      <Text>{text}</Text>
+      <Input />
+      {/* <Text>{text}</Text> */}
 
     </View>
   );
@@ -38,9 +30,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input:{
-    borderBottomWidth: 2,
-    borderBottomColor: "purple",
-    width:"50%",
-  }
+  
 });
