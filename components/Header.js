@@ -5,9 +5,20 @@ export default function Header({name}) {
 
   return (
     <View>
-      <Text>Welcome to {name}</Text>
+      <Text style={styles.header}>Welcome to {name}</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  header:{
+    color: "darkmagenta",
+    fontSize: 20,
+    borderColor:"darkmagenta",
+    borderWidth: 2,
+    padding:5,
+    borderRadius: 5,
+
+  },
+
+});
