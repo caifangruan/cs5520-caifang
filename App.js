@@ -57,10 +57,15 @@ const styles = StyleSheet.create({
   bottomView:{
     flex: 4,
     backgroundColor: "lightpink",
+    alignItems:"center",
   },
   text:{
     textAlign: "center",
-    
+    fontSize:20,
+    backgroundColor:"purple",
+    color: "white",
+    padding: 5,
+    marginTop:5,
   },
   
 });
