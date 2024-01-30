@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, SafeAreaView, ScrollView } from 'react-native';
 import { useState} from "react";
 import Header from './components/Header';
 import Input from './components/Input';
@@ -9,14 +9,27 @@ import Input from './components/Input';
 export default function App() {
   const appName = "My awesome app";
   const [text, setText] = useState("");
+  const [goals, setGoals]= useState([]);
   const [isModalVisible,setIsModalVisible] = useState(false);
+
   function receiveInput(data){
     console.log("receiving input", data)
+
+    const newGoals={text: data, id: Math.random()};
+    //const newArray=[...goals, newGoals];
+    setGoals((currentGoals)=>{
+      return [...currentGoals, newGoals];
+    });
+
+   
+
     setText(data);
     setIsModalVisible(false);
     //use this to update the text showing in the
     //Text component
   }
+
+  console.log(goals);
 
   function dismissModal(){
     setIsModalVisible(false);
@@ -36,7 +49,15 @@ export default function App() {
         />
       </View>
       <View style={styles.bottomView}>
-        <Text style={styles.text}>{text}</Text>
+        <ScrollView contentContainerStyle = {styles.scrollViewContent}>
+          {goals.map((goalObj)=>{
+            return(
+              <View style = {styles.textContainer} key={goalObj.id} >
+                <Text style={styles.text}>{goalObj.text}</Text>
+              </View>
+            ) 
+          })}
+        </ScrollView>
       </View>
     </SafeAreaView> 
   );
@@ -57,15 +78,24 @@ const styles = StyleSheet.create({
   bottomView:{
     flex: 4,
     backgroundColor: "lightpink",
-    alignItems:"center",
+    
   },
   text:{
     textAlign: "center",
-    fontSize:20,
-    backgroundColor:"purple",
+    fontSize:50,
     color: "white",
     padding: 5,
-    marginTop:5,
+    
   },
+  textContainer:{
+    borderRadius:10,
+    marginTop:5,
+    backgroundColor:"purple",
+  },
+  scrollViewContent:{
+    paddingVertical: 20,
+    //alignItems: 'center',
+
+  }
   
 });
