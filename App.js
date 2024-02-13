@@ -5,7 +5,6 @@ import Home from "./components/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GoalDetails from "./components/GoalDetails";
-
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -26,7 +25,7 @@ export default function App() {
         <Stack.Screen
           options={({ route }) => {
             return {
-              headerTitle: route.params.data.text,
+              headerTitle: route.params ? route.params.data.text : "Details",
             };
           }}
           name="Details"
