@@ -15,7 +15,7 @@ export default function Header({ name }) {
   return (
     <View>
       <Text
-        style={[styles.header, { paddingVertical: paddingVerticalDynamic }]}
+        style={[styles.header, { paddingVertical: paddingVerticalDynamic } ]}
       >
         Welcome to {name}
       </Text>

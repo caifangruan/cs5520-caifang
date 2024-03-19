@@ -16,6 +16,8 @@ export async function writeToDB(data, col, docId , subCol){
     }   
 }
 
+
+
 export async function getAllDocs(path){
     try{
         const querySnapshot = await getDocs(collection(database,path));
@@ -40,4 +42,5 @@ export async function deleteFromDB(id){
         console.log(err);
     }
 }
+
 

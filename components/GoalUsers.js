@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { getAllDocs, writeToDB } from "../firebase-files/firestoreHelper";
+import { getAllDocs, writeToDB } from "../firebase_files/firestoreHelper";
 
 export default function GoalUsers({ id }) {
   const [users, setUsers] = useState([]);

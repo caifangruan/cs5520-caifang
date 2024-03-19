@@ -17,8 +17,8 @@ import GoalItem from "./GoalItem";
 import PressableButton from "./PressableButton";
 import { collection, onSnapshot } from "firebase/firestore";
 
-import { deleteFromDB, writeToDB } from "../firebase-files/firestoreHelper";
-import { database } from "../firebase-files/firebaseSetup";
+import { deleteFromDB, writeToDB } from "../firebase_files/firestoreHelper";
+import { database } from "../firebase_files/firebaseSetup";
 export default function Home({ navigation }) {
   function cleanup() {}
   useEffect(() => {
