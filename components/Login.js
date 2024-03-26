@@ -1,13 +1,26 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { auth } from '../firebase_files/firebaseSetup';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const signupHandler = () => {
-    navigation.navigate("Signup");
+    navigation.replace("Signup");
   };
-  const loginHandler = async () => {};
+  const loginHandler = async () => {
+    try {
+      if (!email || !password) {
+        Alert.alert("Fields should not be empty");
+        return;
+      }
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCred);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <View style={styles.container}>

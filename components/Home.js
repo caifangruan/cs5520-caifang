@@ -15,16 +15,19 @@ import { useState, useEffect } from "react";
 import Input from "./Input";
 import GoalItem from "./GoalItem";
 import PressableButton from "./PressableButton";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
-import { deleteFromDB, writeToDB } from "../firebase_files/firestoreHelper";
-import { database } from "../firebase_files/firebaseSetup";
+import { deleteFromDB, writeToDB } from '../firebase_files/firestoreHelper'
+import { auth, database } from '../firebase_files/firebaseSetup';
 export default function Home({ navigation }) {
   function cleanup() {}
   useEffect(() => {
     // set up a listener to get realtime data from firestore - only after the first render
     const unsubscribe = onSnapshot(
-      collection(database, "goals"),
+      query(
+        collection(database, "goals"),
+        where("owner", "==", auth.currentUser.uid)
+      ),
       (querySnapshot) => {
         if (querySnapshot.empty) {
           Alert.alert("You need to add something");
@@ -41,6 +44,9 @@ export default function Home({ navigation }) {
         // console.log(newArray);
         //updating the goals array with the new array
         setGoals(newArray);
+      },
+      (error) => {
+        Alert.alert(error.message);
       }
     );
     return () => {
@@ -52,8 +58,8 @@ export default function Home({ navigation }) {
   // const [text, setText] = useState("");
   const [goals, setGoals] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  function receiveInput(data) {
-    // console.log("recieve input ", data);
+  function receiveInput(data, imageUri) {
+    console.log("we are in Home ", imageUri);
     // setText(data);
     //1. define a new object {text:.., id:..} and store data in object's text
     // 2. use Math.random() to set the object's id

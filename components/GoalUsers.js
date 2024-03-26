@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { getAllDocs, writeToDB } from "../firebase_files/firestoreHelper";
+import { getAllDocs, writeToDB } from '../firebase_files/firestoreHelper';
 
 export default function GoalUsers({ id }) {
   const [users, setUsers] = useState([]);
@@ -9,6 +9,7 @@ export default function GoalUsers({ id }) {
       try {
         const usersFromDB = await getAllDocs(`goals/${id}/users`);
         console.log(usersFromDB);
+        // we should check if usersFromDB is undefined
         if (usersFromDB.length) {
           setUsers(usersFromDB);
           return;

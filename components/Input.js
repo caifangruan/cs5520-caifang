@@ -8,9 +8,11 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import ImageManager from "./ImageManager";
 
 export default function Input({ inputHandler, modalVisible, dismissModal }) {
   const [text, setText] = useState("");
+  const [imageURI, setImageURI] = useState("");
   // callback handler
   function changeTextHandler(changedText) {
     // console.log("user is typing ", changedText);
@@ -19,7 +21,7 @@ export default function Input({ inputHandler, modalVisible, dismissModal }) {
   }
 
   function confirmHandler() {
-    inputHandler(text);
+    inputHandler(text, imageURI);
     setText("");
   }
   function cancelHandler() {
@@ -27,6 +29,9 @@ export default function Input({ inputHandler, modalVisible, dismissModal }) {
 
     // hide the modal
     dismissModal();
+  }
+  function receiveImageURI(takenImageUri) {
+    setImageURI(takenImageUri);
   }
   return (
     <Modal visible={modalVisible} animationType="slide" transparent={true}>
@@ -45,6 +50,7 @@ export default function Input({ inputHandler, modalVisible, dismissModal }) {
             value={text}
             onChangeText={changeTextHandler}
           />
+          <ImageManager receiveImageURI={receiveImageURI} />
           <View style={styles.buttonsContainer}>
             <View style={styles.buttonView}>
               <Button title="Cancel" onPress={cancelHandler} />
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   modalView: {
-    backgroundColor: "#999",
+    backgroundColor: "#eee",
     borderRadius: 20,
     padding: "10%",
     alignItems: "center",
